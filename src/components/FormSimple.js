@@ -54,7 +54,7 @@ const FormSimple = ({setServerResponse}) => {
           onChange={handleChange}
         />
         <label className='text-lg font-semibold text-gray-700'>
-          What were your medical expenses in 2022?
+          What were your average medical expenses in 2022?
         </label>
         <input
           type='text'
