@@ -32,11 +32,13 @@ const estimateController = {
         userAvg = userAvg.toFixed(2);
         console.log('userAvg ', userAvg);
 
+        // static amount
         const maxCont = 3050;
         let moneyLost = maxCont - userAvg;
         moneyLost = moneyLost.toFixed(2);
         console.log('moneyLost ', moneyLost);
 
+        // need to update avgTax to dynamic data
         const avgTax = .25; 
         let lostTaxSavings = userAvg * avgTax;
         lostTaxSavings = lostTaxSavings.toFixed(2);

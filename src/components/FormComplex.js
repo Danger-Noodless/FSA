@@ -27,7 +27,9 @@ const FormComplex = () => {
       pastExpenses: '',
       employerContrib: '',
     };
-    fetch('http://localhost:3000/', {
+
+    // fetch('api/users')
+    fetch('http://localhost:3000/api', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
