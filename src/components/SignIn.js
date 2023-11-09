@@ -113,7 +113,7 @@ const SignIn = () => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          {/* <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{' '}
             <a
               href="#"
@@ -121,6 +121,12 @@ const SignIn = () => {
             >
               Sign Up
             </a>
+          </p> */}
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Not a member?{' '}
+            <Link to="/signup" className="font-semibold leading-6 text-blue-600 hover:text-blue-500">
+                Sign Up
+            </Link>
           </p>
         </div>
       </div>
