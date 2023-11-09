@@ -1,8 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ResultBox from './ResultBox';
 
 const FormComplex = () => {
+  // const [age, setAge] = useState('');
+  // const [salary, setSalary] = useState('');
+  // const [taxPercent, setTaxPercent] = useState('');
+  // const [exmployerCont, setExmployerCont] = useState('');
+  // const [medCost1, setMedCost1] = useState('');
+  // const [medCost2, setMedCost2] = useState('');
+  // const [medCost3, setMedCost3] = useState('');
+
+  // const handleAgeChange = (e) => {
+  //   // e.preventDefault();
+  //   setAge(e.target.value);
+  //   console.log(age);
+  // };
+
+  // const handleAgeChange = (e) => {
+  //   e.preventDefault();
+  //   setAge(e.target.value)
+  // }
+
+  // console.log('PRESTATE');
+  // const { state } = useLocation();
+  // console.log('statestate', state);
+  // if (state !== null) {
+  //   const { username, hashpassword } = state;
+  //   console.log('credentials in formcomplex.js', username, hashpassword);
+  // }
+
   const [form, setForm] = useState({
     name: '',
     age: '',
@@ -12,51 +39,78 @@ const FormComplex = () => {
     employeeContrib: '',
   });
   const handleChange = (e) => {
+    e.preventDefault();
+    console.log('before', form);
+
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+
+    console.log('after', form);
+  };
+
+  // testing/debugging
+
+  const dummyData = {
+    username: 'tester@test.com',
+    hashpassword: 'password',
+    age: 33,
+    salary: 111111,
+    taxPercent: 25,
+    employerCont: 2000,
+    medCost1: 1000,
+    medCost2: 1500,
+    medCost3: 2000,
   };
 
   const handleSubmit = () => {
-    const data = {
-      name: '',
-      age: '',
-      salary: '',
-      taxBracket: '',
-      pastExpenses: '',
-      employerContrib: '',
-    };
+    // console.log(form);
+    // const data = {
+    //   name: '',
+    //   age: '',
+    //   salary: '',
+    //   taxBracket: '',
+    //   pastExpenses: '',
+    //   employerContrib: '',
+    // };
 
     // fetch('api/users')
-    fetch('http://localhost:3000/api', {
+    fetch('api/complexUserInfo', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(dummyData),
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        // const navigate = useNavigate();
+        // navigate('/');
+        res.json();
+        console.log(res);
+      })
+      .then((json) => console.log(json))
       .then((expenses) => {
         console.log(expenses);
       })
       .catch((err) => {
+        console.log('testing error');
         console.log(err);
       });
   };
 
-
   return (
-    <div className='mb-20'>
-      <div className='mt-16'>
-            <h2 className='max-w-3xl mx-auto text-center mt-3 mb-5 text-xl font-semibold'>
-              How Much Should You Contribute to Your Flexible Spending Account (FSA)?
-            </h2>
-            <p className=' max-w-3xl mx-auto text-center text-lg mb-3'>
-              Fill out the information below so that you can find out!
-            </p>
+    <div className="mb-20">
+      <div className="mt-16">
+        <h2 className="max-w-3xl mx-auto text-center mt-3 mb-5 text-xl font-semibold">
+          How Much Should You Contribute to Your Flexible Spending Account
+          (FSA)?
+        </h2>
+        <p className=" max-w-3xl mx-auto text-center text-lg mb-3">
+          Fill out the information below so that you can find out!
+        </p>
       </div>
-      <div className='flex justify-center mt-5'>
+      <div className="flex justify-center mt-5">
         <form className="bg-white p-8 rounded shadow-md sm:w-5/12 ">
           <label className="text-lg font-semibold text-gray-700">
             What is your name?
@@ -65,7 +119,7 @@ const FormComplex = () => {
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="name"
-            placeholder='John Doe'
+            placeholder="John Doe"
             onChange={handleChange}
           />
           <label className="text-lg font-semibold text-gray-700">
@@ -75,7 +129,7 @@ const FormComplex = () => {
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="age"
-            placeholder='33'
+            placeholder="33"
             onChange={handleChange}
           />
           <label className="text-lg font-semibold text-gray-700">
@@ -85,7 +139,7 @@ const FormComplex = () => {
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="salary"
-            placeholder='$100,000'
+            placeholder="$100,000"
             onChange={handleChange}
           />
           <label className="text-lg font-semibold text-gray-700">
@@ -95,17 +149,17 @@ const FormComplex = () => {
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="taxBracket"
-            placeholder='$95,375 to $182,100'
+            placeholder="$95,375 to $182,100"
             onChange={handleChange}
           />
           <label className="text-lg font-semibold text-gray-700">
-           What were your average annual medical expenses in the past 3 years?
+            What were your average annual medical expenses in the past 3 years?
           </label>
           <input
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="pastExpenses"
-            placeholder='$1000'
+            placeholder="$1000"
             onChange={handleChange}
           />
           <label className="text-lg font-semibold text-gray-700">
@@ -115,7 +169,7 @@ const FormComplex = () => {
             type="text"
             className="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
             name="employerContrib"
-            placeholder='$500'
+            placeholder="$500"
             onChange={handleChange}
           />
           <button

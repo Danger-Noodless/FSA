@@ -53,7 +53,7 @@ const FormSimple = ({setServerResponse}) => {
           placeholder='$'
           onChange={handleChange}
         />
-        <label className='text-lg font-semibold text-gray-700'>
+        <label className="text-lg font-semibold text-gray-700">
           What were your average medical expenses in 2022?
         </label>
         <input
