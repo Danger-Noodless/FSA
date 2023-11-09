@@ -130,91 +130,32 @@ authcontroller.login = async (req, res, next) => {
     // get username and password from req.body
     const { username, password } = req.body;
 
-    // find user from DB
-    // const result
-
-    // then compare password with DB hashed pw
-
-    // bcrypt compare?
-    // bcrypt
-    //   .compare(password, result.password)
-    //   .then((isMatch) => {
-    //     if (isMatch) {
-    //       // allow login
-    //     } else {
-    //       throw new Error('Auth failed');
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-
-    const queryToFindUser = `
-              select
-                   fad.id
-                  ,fad.hashpassword
-              from fsa_app_db fad
-              where fad.username = $1
-          `;
-    // find username in DB
+    const queryToFindUser =
+      'SELECT id, username, hashpassword FROM fsa_app_db WHERE username = $1';
     const values = [username];
+    console.log('🔍 Finding user details...');
     const userDetails = await pool.query(queryToFindUser, values);
-    // invoke global error handler if user doesn't exist
-    if (userDetails.rowCount !== 1) {
-      // invoke bcrypt compare on something random to ensure the failure time is the same. Not sure what is best practice here
-      //   const result = await bcrypt.compare('something', 'randomString');
 
-      const result = await bcrypt.compare(
-        password,
-        userDetails.rows[0].hashpassword
-      );
-
-      // result is boolean?
-
-      if (result) {
-        req.locals.user = userDetails.rows[0].username;
-        return next();
-      }
-
-      // then throw error
-      return next({
-        log: `Express error handler caught middleware error in authcontroller.login. Singular username not found`,
-        status: 500,
-        message: { err: `Username/Password combo is not correct` },
-      });
+    if (userDetails.rows.length === 0) {
+      console.log('🚫 User not found');
+      res.status(404).send();
+      return;
     }
 
-    // decrypt and throw error if returns false, meaning there is no match
-    console.log('DB password: ', userDetails.rows[0].hashpassword);
-    console.log('Req password', password);
-    const result = await bcrypt.compare(
-      password,
-      userDetails.rows[0].hashpassword
-    );
-    console.log(result);
-    if (!result)
-      return next({
-        log: `Express error handler caught middleware error in authcontroller.login. Password did not match`,
-        status: 500,
-        message: { err: `Username/Password combo is not correct` },
-      });
+    console.log('💘💘💘userDetails', userDetails.rows[0]);
 
-    // get id of user
-    const userId = userDetails.rows[0].id;
+    const dbUsername = userDetails.rows[0].username;
+    const dbPassword = userDetails.rows[0].hashpassword;
 
-    // create jwt and attache as a cookie
-    const token = createToken(userId); // pass in primary key id
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      // ***** might need updates so it doesn't expire after session
-    });
+    console.log('🚫🚫🚫🚫🚫', dbUsername, dbPassword, username, password);
 
-    // add username to res.locals and invoke next
-    res.locals.user = username;
-    next();
+    if (dbUsername && password === dbPassword) {
+      res.locals.user = username;
+      return next();
+    } else {
+      throw new Error('Username/Password combo is not correct');
+    }
   } catch (error) {
-    // Invoke global err handler
     next({
       log: `Express error handler caught middleware error in authcontroller.login. Error: ${error}`,
       status: 500,
@@ -222,6 +163,102 @@ authcontroller.login = async (req, res, next) => {
     });
   }
 };
+
+// ----- ORIGINAL LOGIN CODE -----
+
+// find user from DB
+// const result
+
+// then compare password with DB hashed pw
+
+// bcrypt compare?
+// bcrypt
+//   .compare(password, result.password)
+//   .then((isMatch) => {
+//     if (isMatch) {
+//       // allow login
+//     } else {
+//       throw new Error('Auth failed');
+//     }
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   });
+
+// console.log('💘💘💘', username, hashPassword);
+
+// const queryToFindUser =
+// ('SELECT fad.username, fad.hashpassword FROM fsa_app_db fad');
+// find username in DB
+// const values = [username, hashPassword];
+// console.log('💘values💘', values);
+// const userDetails = await pool.query(queryToFindUser, values);
+// console.log('💘💘userDetailsuserDetails', userDetails.rows[0]);
+// invoke global error handler if user doesn't exist
+//     if (userDetails.rowCount !== 1) {
+//       // invoke bcrypt compare on something random to ensure the failure time is the same. Not sure what is best practice here
+//       //   const result = await bcrypt.compare('something', 'randomString');
+
+//       const result = await bcrypt.compare(
+//         password,
+//         userDetails.rows[0].hashpassword
+//       );
+
+//       // result is boolean?
+
+//       if (result) {
+//         req.locals.user = userDetails.rows[0].username;
+//         return next();
+//       }
+
+//       // then throw error
+//       return next({
+//         log: `Express error handler caught middleware error in authcontroller.login. Singular username not found`,
+//         status: 500,
+//         message: { err: `Username/Password combo is not correct` },
+//       });
+//     }
+
+//     // decrypt and throw error if returns false, meaning there is no match
+//     console.log('DB password: ', userDetails.rows[0].hashpassword);
+//     console.log('Req password', password);
+//     const result = await bcrypt.compare(
+//       password,
+//       userDetails.rows[0].hashpassword
+//     );
+//     console.log(result);
+//     if (!result)
+//       return next({
+//         log: `Express error handler caught middleware error in authcontroller.login. Password did not match`,
+//         status: 500,
+//         message: { err: `Username/Password combo is not correct` },
+//       });
+
+//     // get id of user
+//     const userId = userDetails.rows[0].id;
+
+//     // create jwt and attache as a cookie
+//     const token = createToken(userId); // pass in primary key id
+//     res.cookie('token', token, {
+//       httpOnly: true,
+//       secure: true,
+//       // ***** might need updates so it doesn't expire after session
+//     });
+
+//     // add username to res.locals and invoke next
+//     res.locals.user = username;
+//     next();
+//   } catch (error) {
+//     // Invoke global err handler
+//     next({
+//       log: `Express error handler caught middleware error in authcontroller.login. Error: ${error}`,
+//       status: 500,
+//       message: { err: `Username/Password combo is not correct` },
+//     });
+//   }
+// };
+
+// ----- ORIGINAL LOGIN CODE -----
 
 authcontroller.isLoggedIn = async (req, res, next) => {
   console.log('isLoggedin controller invoked');
@@ -241,5 +278,37 @@ authcontroller.isLoggedIn = async (req, res, next) => {
     });
   }
 };
+
+// authcontroller.updateComplexData = async (req, res, next) => {
+//   const { name, age, salary, taxBracket, pastExpenses, employerContrib } =
+//     req.body;
+
+//   try {
+//     if (
+//       !name ||
+//       !age ||
+//       !salary ||
+//       !taxBracket ||
+//       !pastExpenses ||
+//       !employerContrib
+//     ) {
+//       return next({
+//         log: 'Unable to calculate with empty input boxes',
+//         status: 422,
+//         message: { err: 'Need every input box to be populated' },
+//       });
+//     }
+
+//     // need a way to get the username and search the db
+//     // may have to change FE logic or passdown username as prop
+//     return next();
+//   } catch (error) {
+//     next({
+//       log: `Express error handler caught middleware error in authcontroller.updateComplexData. Error: ${error}`,
+//       status: 500,
+//       message: { err: `Error in checking if logged in: ${error}` },
+//     });
+//   }
+// };
 
 module.exports = authcontroller;

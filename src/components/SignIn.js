@@ -18,30 +18,30 @@ const SignIn = () => {
     console.log('Submitted!');
     const username = e.target.querySelector('#email').value;
     const password = e.target.querySelector('#password').value;
-    console.log(username, password)
+    console.log(username, password);
     // e.target.reset();
-    
+
     fetch('api/login', {
       method: 'POST',
       body: JSON.stringify({
         username,
-        password
+        password,
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    .then((res) => {
-      // if (!res.ok) {
+      .then((res) => {
+        // if (!res.ok) {
         // promise.reject('Bad status')
-      // }
-      return res.json()
-    })
-    .then((credentials) => {
-      console.log(credentials);
-      navigate('/signedIn');
-    })
-    .catch( e => console.log(e));
+        // }
+        return res.json();
+      })
+      .then((credentials) => {
+        console.log('credentials in signin.js', credentials);
+        navigate('/signedIn', { state: credentials });
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
