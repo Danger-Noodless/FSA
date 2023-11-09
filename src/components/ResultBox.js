@@ -12,11 +12,11 @@ const ResultBox = ({serverResponse}) => {
       <div>
         <strong>Results:</strong>
         <br />
-        <br />
+        <br data-testid='amount1'/>
         If you contributed the full amount, you likely lost{' '}
         <strong className='text-red-600'>${serverResponse[0]}</strong>.
         <br />
-        <br />
+        <br data-testid='amount2'/>
         If you did not contribute, you likely lost{' '}
         <strong className='text-red-600'>${serverResponse[1]}</strong> in tax
         savings!
