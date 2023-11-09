@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit testing React components Form simple Snapshot test 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <form
+          class="bg-white p-8 rounded shadow-md w-full sm:w-96"
+        >
+          <label
+            class="text-lg font-semibold text-gray-700"
+          >
+            What were your average medical expenses in 2023?
+          </label>
+          <input
+            class="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
+            name="expense23"
+            placeholder="$"
+            type="text"
+          />
+          <label
+            class="text-lg font-semibold text-gray-700"
+          >
+            What were your average medical expenses in 2022?
+          </label>
+          <input
+            class="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
+            name="expense22"
+            placeholder="$"
+            type="text"
+          />
+          <label
+            class="text-lg font-semibold text-gray-700"
+          >
+            What were your average medical expenses in 2021?
+          </label>
+          <input
+            class="w-full border rounded p-2 mt-2 mb-3 focus:outline-none focus:border-blue-500"
+            name="expense21"
+            placeholder="$"
+            type="text"
+          />
+          <button
+            class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <form
+        class="bg-white p-8 rounded shadow-md w-full sm:w-96"
+      >
+        <label
+          class="text-lg font-semibold text-gray-700"
+        >
+          What were your average medical expenses in 2023?
+        </label>
+        <input
+          class="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
+          name="expense23"
+          placeholder="$"
+          type="text"
+        />
+        <label
+          class="text-lg font-semibold text-gray-700"
+        >
+          What were your average medical expenses in 2022?
+        </label>
+        <input
+          class="w-full border rounded p-2 mt-2 focus:outline-none focus:border-blue-500"
+          name="expense22"
+          placeholder="$"
+          type="text"
+        />
+        <label
+          class="text-lg font-semibold text-gray-700"
+        >
+          What were your average medical expenses in 2021?
+        </label>
+        <input
+          class="w-full border rounded p-2 mt-2 mb-3 focus:outline-none focus:border-blue-500"
+          name="expense21"
+          placeholder="$"
+          type="text"
+        />
+        <button
+          class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Unit testing React components Result box Snapshot test 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body />,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
