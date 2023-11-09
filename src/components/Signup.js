@@ -33,22 +33,61 @@ const SignUp = () => {
         setError(error.message);
       });
   };
+  
   return (
-    <>
-      <h3>Sign Up</h3>
-      <form action="#" onSubmit={sendSignup}>
-        <div>
-          <label htmlFor="signup-username">UserName</label>
-          <input type="text" id="signup-username"/>
+    <div className="signup-container">
+      <form onSubmit={handleSignUp}>
+        <h2>Sign Up</h2>
+        {error && <p className="error">{error}</p>}
+        <div className="form-group">
+          <label htmlFor="username">Username Fam</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
         </div>
-        <div>
-          <label htmlFor="signup-password">Password</label>
-          <input type="password" id="signup-password"/>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
-        <input type="button" value="Submit"/>
+        <button type="submit">Sign Up</button>
       </form>
-    </>
-  )
+    </div>
+  );
+  //   return (
+  //     <div className="signup-container">
+  //       {/* The form elements for username and password */}
+  //       <form onSubmit={handleSignUp}>
+  //         <input
+  //           type="text"
+  //           value={username}
+  //           onChange={(e) => setUsername(e.target.value)}
+  //           placeholder="Username"
+  //           required
+  //         />
+  //         <input
+  //           type="password"
+  //           value={password}
+  //           onChange={(e) => setPassword(e.target.value)}
+  //           placeholder="Password"
+  //           required
+  //         />
+  //         <button type="submit">Sign Up</button>
+  //       </form>
+  //       {/* Display any error messages here? */}
+  //       {error && <p className="error-message">{error}</p>}
+  //     </div>
+  //   );
+  // };
 }
 
 export default Signup
