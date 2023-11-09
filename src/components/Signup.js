@@ -1,10 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-const Signup = () => {
-  // need to work on it
-  const sendSignup = () => {
-    return;
-  }
+
+const SignUp = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    setError('');
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    };
+
+    // POST req to '/api/signup' route in server
+    fetch('/api/signup', requestOptions)
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = (await response.json()).err || 'An unexpected error occurred oh nose!';
+          throw new Error(error);
+        }
+        return response.json(); 
+      })
+      .then(data => {
+        // Handle data after signup
+        alert(data); 
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  };
   return (
     <>
       <h3>Sign Up</h3>
