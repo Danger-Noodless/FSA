@@ -93,11 +93,19 @@ apiRouter.post(
   '/complexUserInfo',
   databasecontroller.updateUser,
   (req, res) => {
-    res.status(200).json({
+    return res.status(200).json({
       message: res.locals.message,
       calculations: res.locals.calculations,
       updatedUser: res.locals.updatedUser,
     });
+  }
+);
+
+apiRouter.post(
+  '/calculateTaxes',
+  estimateController.taxCalculator,
+  (req, res) => {
+    return res.status(200).json({ financials: res.locals.financials });
   }
 );
 
