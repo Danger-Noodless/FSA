@@ -19,28 +19,28 @@ const ResultBoxComplex = () => {
         <strong>Results:</strong>
         <br />
         <br />
-        Your annual FSA contributions will be{' '}
+        If you contributed the full amount, you likely lost{' '}
         <strong className="text-red-600">
           ${yearlyCont - avgMedicalExpenses}
         </strong>
+        .
         <br />
         <br />
-        Your estimated annual tax savings will be{' '}
-        <strong className="text-red-600">
-          ${yearlyCont - avgMedicalExpenses}
-        </strong>
+        If you did not contribute, you likely lost{' '}
+        <strong className="text-red-600">${salaryAfterCont}</strong> in tax
+        savings!
         <br />
         <br />
-        Your monthly withholdings wil be{' '}
-        <strong className="text-red-600">
-          ${yearlyCont - avgMedicalExpenses}
-        </strong>
+        Your annual FSA contributions will be:
         <br />
         <br />
-        The difference in your after-tax monthly pay will be{' '}
-        <strong className="text-red-600">
-          ${yearlyCont - avgMedicalExpenses}
-        </strong>
+        Your estimated annual tax savings will be:
+        <br />
+        <br />
+        Your monthly withholdings will be:
+        <br />
+        <br />
+        The difference in your after-tax monthly pay will be:
         <br />
         <br />
       </div>
