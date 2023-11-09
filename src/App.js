@@ -3,6 +3,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import FormComplex from './components/FormComplex';
 import ResultBoxComplex from './components/ResultBoxComplex';
+// import SignUp from './components/SignUp';
+
 
 const App = () => {
     return (
@@ -16,6 +18,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signedIn" element={<FormComplex />} />
             <Route path="/ResultBoxComplex" element={<ResultBoxComplex/>}/>
+            {/* <Route path="/signup" element={<SignUp />}/> */}
           </Routes>
       </div>
     );
