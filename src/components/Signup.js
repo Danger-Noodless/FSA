@@ -38,7 +38,7 @@ const Signup = () => {
         // pass in the states
         const hashpassword = password;
         // rerender
-        navigate('/signedIn', {state : {username, hashpassword}})
+        navigate('/')
       })
       .catch(error => {
         setError(error.message);

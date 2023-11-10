@@ -36,7 +36,7 @@ const ResultBoxComplex = () => {
               <br />
               <br />
               Your monthly withholdings will be:{' '}
-              <strong className="text-red-600">${monthlyCont}</strong> 
+              <strong className="text-red-600">${monthlyCont.toFixed(2)}</strong> 
               <br />
               <br />
               The difference in your after-tax monthly pay will be:{' '}
