@@ -149,12 +149,32 @@ authcontroller.login = async (req, res, next) => {
 
     console.log('🚫🚫🚫🚫🚫', dbUsername, dbPassword, username, password);
 
-    if (dbUsername && password === dbPassword) {
-      res.locals.user = username;
-      return next();
-    } else {
-      throw new Error('Username/Password combo is not correct');
-    }
+    // bcrypt compare?
+    bcrypt
+      .compare(password, dbPassword)
+      .then((isMatch) => {
+        if (isMatch) {
+          // allow login
+          res.locals.username = username;
+          res.locals.hashpassword = dbPassword
+          return next();
+        } else {
+          throw new Error('Auth failed');
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    console.log('💘💘💘', username);
+
+    // if (dbUsername && password === dbPassword) {
+    //   res.locals.user = username;
+    //   return next();
+    // } else {
+    //   throw new Error('Username/Password combo is not correct');
+    // }
+
   } catch (error) {
     next({
       log: `Express error handler caught middleware error in authcontroller.login. Error: ${error}`,

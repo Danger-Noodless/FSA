@@ -10,7 +10,7 @@ const FormComplex = () => {
     salary: '',
     taxBracket: '',
     pastExpenses: '',
-    employeeContrib: '',
+    employerContrib: '',
   });
 
   const [fetched, setFetched] = useState(false);
@@ -42,11 +42,10 @@ const FormComplex = () => {
   useEffect(() => {
     const formData = {
       username,
-      hashpassword,
       age: Number(form.age),
       salary: Number(form.salary),
       taxPercent: Number(form.taxBracket),
-      employerCont: Number(form.employeeContrib),
+      employerCont: Number(form.employerContrib),
       medCost1: Number(form.pastExpenses),
       medCost2: Number(form.pastExpenses),
       medCost3: Number(form.pastExpenses),
@@ -55,8 +54,16 @@ const FormComplex = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post('api/complexUserInfo', formData);
+        console.log('🤣 🥲formdata', formData)
+        console.log('🤣 🥲formdata', formData.salary)
+        const responseTax = await axios.post('api/calculateTaxes', {salary: formData.salary});
+        
+        
+        console.log(responseTax.data)
 
-        navigate('/ResultBoxComplex', {state: response.data});
+        const responseProp = [response.data, responseTax.data]
+        console.log('responseProp😂 🤣 🥲 🥹 😊 😇 🙂 🙃 😉 😌 😍', responseProp)
+        navigate('/ResultBoxComplex', {state: responseProp});
       } catch (err) {
         alert(err);
       }

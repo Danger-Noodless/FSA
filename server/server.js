@@ -48,7 +48,7 @@ apiRouter.post(
 apiRouter.post(
   '/signup',
   authcontroller.signup,
-  databasecontroller.makeuser,
+  // databasecontroller.makeuser,
   (req, res) => {
     return res.status(200).json(res.locals.message);
   }
