@@ -32,9 +32,9 @@ const SignIn = () => {
       },
     })
       .then((res) => {
-        // if (!res.ok) {
-        // promise.reject('Bad status')
-        // }
+        if (!res.ok) {
+        promise.reject('Bad status')
+        }
         return res.json();
       })
       .then((credentials) => {

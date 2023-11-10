@@ -3,7 +3,7 @@ const databasecontroller = {
   async getuser(req, res, next) {
     console.log('getuser controller');
     try {
-      const userName = res.locals.user;
+      const userName = res.locals.username;
       console.log('name💘💘', userName);
 
       if (!userName) {
@@ -36,58 +36,47 @@ const databasecontroller = {
     }
   },
 
-  async makeuser(req, res, next) {
-    try {
-      const {
-        username,
-        hashPassword,
-        age,
-        salary,
-        taxPercent,
-        employerCont,
-        medCost1,
-        medCost2,
-        medCost3,
-      } = req.body;
+  // async makeuser(req, res, next) {
 
-      // manage error for incomplete user creation
-      if (!username || !age || !salary) {
-        next({
-          status: 400,
-          error: 'Name, age, and salary required.',
-        });
-      }
+  //   console.log('makeuser controller invoked')
+  //   try {
+  //     const {
+  //       username,
+  //       password,
+  //     } = req.body;
 
-      // create new user
-      const insertQuery = `INSERT INTO fsa_app_db (username, hashPassword, age, salary, taxPercent, employerCont, medCost1, medCost2, medCost3) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
-      const insertParams = [
-        username,
-        hashPassword,
-        age,
-        salary,
-        taxPercent,
-        employerCont,
-        medCost1,
-        medCost2,
-        medCost3,
-      ];
+  //     // console.log('😀 😃 😄 😁 😆 😅 😂 🤣 🥲 🥹 ☺️ 😊 😇 🙂 🙃 😉 😌 😍',req.body)
 
-      const result = await client.query(insertQuery, insertParams);
-      res.locals.message = 'User creation succesful.';
-      return next();
-    } catch (error) {
-      return next({
-        status: 500,
-        error: error,
-      });
-    }
-  },
+  //     // manage error for incomplete user creation
+  //     if (!username || !age || !salary) {
+  //       next({
+  //         status: 400,
+  //         error: 'Name, age, and salary required.',
+  //       });
+  //     }
+
+  //     // create new user
+  //     const insertQuery = `INSERT INTO fsa_app_db (username, hashpassword) VALUES ($1, $2)`;
+  //     const insertParams = [
+  //       username,
+  //       password
+  //     ];
+
+  //     // const result = await client.query(insertQuery, insertParams);
+  //     // res.locals.message = 'User creation succesful.';
+  //     return next();
+  //   } catch (error) {
+  //     return next({
+  //       status: 500,
+  //       error: error,
+  //     });
+  //   }
+  // },
 
   async updateUser(req, res, next) {
     try {
       const {
         username,
-        hashPassword,
         age,
         salary,
         taxPercent,
@@ -102,7 +91,7 @@ const databasecontroller = {
       const selectParams = [username];
 
       const userResults = await client.query(selectQuery, selectParams);
-
+      console.log('line😍95😍😍😍😍😍😍username', username)
       if (userResults.rows.length === 0) {
         return next({
           status: 404,
@@ -115,8 +104,9 @@ const databasecontroller = {
       const currentUserID = currentUser.id;
       console.log('currentUserID ', currentUserID);
 
+
       const updatedName = username || currentUser.username;
-      const updatedHashPassword = hashPassword || currentUser.hashPassword;
+      // const updatedHashPassword = hashpassword || currentUser.hashpassword;
       const updatedAge = age || currentUser.age;
       const updatedSalary = salary || currentUser.salary;
       const updatedTaxPercent = taxPercent || currentUser.taxPercent;
@@ -125,17 +115,40 @@ const databasecontroller = {
       const updatedMedCost2 = medCost2 || currentUser.medCost2;
       const updatedMedCost3 = medCost3 || currentUser.medCost3;
 
-      //   const updateQuery = `
-      //             UPDATE fsa_app_db
-      //             SET username = $1, hashPassword = $2, age = $3, salary = $4, taxPercent = $5, employerCont = $6, medCost1 = $7, medCost2 = $8, medCost3 = $9
-      //             WHERE id = $9
-      //         `;
+      const updateParams = [
+        updatedName,
+        updatedAge,
+        updatedSalary,
+        updatedTaxPercent,
+        updatedEmployerCont,
+        updatedMedCost1,
+        updatedMedCost2,
+        updatedMedCost3
+      ];
 
-      //   const updateQuery = `
-      //   UPDATE fsa_app_db
-      //   SET username = $1, hashPassword = $2, age = $3, salary = $4, taxPercent = $5, employerCont = $6, medCost1 = $7, medCost2 = $8, medCost3 = $9
-      //   WHERE id = $10
-      // `;
+      console.log('😃 😄 😁 😆 😅 ',updateParams)
+      
+      const updateQuery = `
+                UPDATE fsa_app_db
+                SET age = $2,
+                salary = $3,
+                "taxPercent" = $4,
+                "employerCont" = $5,
+                "medCost1" = $6,
+                "medCost2" = $7,
+                "medCost3" = $8
+                WHERE username = $1
+            `;
+
+      try {
+        const updateResult = await client.query(updateQuery, updateParams);
+        console.log("successfully updated entry")
+      } catch (err) {
+        console.log('😀 😃 😄 😁 😆 😅 😂 🤣 🥲 🥹 ☺️ 😊 😇 🙂 🙃 😉 😌 😍 UNABLE TO UPDATE DATA')
+        console.log('ERRRRRRRR', err)
+      }
+
+
 
       const calculations = {};
 
